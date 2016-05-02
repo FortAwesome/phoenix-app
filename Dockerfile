@@ -17,7 +17,7 @@ RUN touch /etc/init.d/couchdb
 
 # install Node.js (>= 5.0.0) and NPM in order to satisfy brunch.io dependencies
 # See http://www.phoenixframework.org/docs/installation#section-node-js-5-0-0-
-RUN curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash - && apt-get install -y nodejs
+RUN curl -sL https://deb.nodesource.com/setup_5.x | apt-get install -y nodejs
 
 # download and install Erlang package
 RUN wget http://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb \

@@ -46,8 +46,10 @@ RUN wget http://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb \
  && dpkg -i erlang-solutions_1.0_all.deb \
  && apt-get update
 
+ENV ERLANG_VERSION 1:18.3.4
+
 # install Erlang
-RUN apt-get install -y esl-erlang && rm erlang-solutions_1.0_all.deb
+RUN apt-get install -y esl-erlang=$ERLANG_VERSION && rm erlang-solutions_1.0_all.deb
 
 ENV ELIXIR_VERSION 1.3.1
 

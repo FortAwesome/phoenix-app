@@ -46,12 +46,12 @@ RUN wget http://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb \
  && dpkg -i erlang-solutions_1.0_all.deb \
  && apt-get update
 
-ENV ERLANG_VERSION 1:19.1
+ENV ERLANG_VERSION 1:19.2
 
 # install Erlang
 RUN apt-get install -y esl-erlang=$ERLANG_VERSION && rm erlang-solutions_1.0_all.deb
 
-ENV ELIXIR_VERSION 1.3.3
+ENV ELIXIR_VERSION 1.4.0
 
 # install Elixir
 RUN mkdir /opt/elixir \
@@ -64,7 +64,7 @@ RUN mkdir /opt/elixir \
   && ln -s /opt/elixir/bin/iex \
   && ln -s /opt/elixir/bin/mix
 
-ENV PHOENIX_VERSION 1.2.0
+ENV PHOENIX_VERSION 1.2.1
 
 # install the Phoenix Mix archive
 RUN mix archive.install --force https://github.com/phoenixframework/archives/raw/master/phoenix_new-$PHOENIX_VERSION.ez

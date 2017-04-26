@@ -1,6 +1,4 @@
-FROM ubuntu:latest
-
-RUN apt-get install -y locales
+FROM ubuntu:14.04.5
 
 # Elixir requires UTF-8
 RUN locale-gen en_US.UTF-8
@@ -8,7 +6,7 @@ ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
-# update and install some software requirements
+# Update and install some software requirements
 RUN apt-get update && apt-get upgrade -y && apt-get install -y curl build-essential wget git make postgresql inotify-tools xz-utils unzip
 
 # For some reason, installing Elixir tries to remove this file

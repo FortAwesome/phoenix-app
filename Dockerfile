@@ -51,6 +51,8 @@ ENV ERLANG_VERSION 1:19.3
 # install Erlang
 RUN apt-get install -y esl-erlang=$ERLANG_VERSION && rm erlang-solutions_1.0_all.deb
 
+RUN apt-mark hold esl-erlang
+
 ENV ELIXIR_VERSION 1.4.2
 
 # install Elixir

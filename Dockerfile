@@ -32,7 +32,7 @@ RUN set -ex \
   done
 
 ENV NPM_CONFIG_LOGLEVEL info
-ENV NODE_VERSION 6.3.0
+ENV NODE_VERSION 6.11.0
 
 RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.xz" \
   && curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/SHASUMS256.txt.asc" \
@@ -46,14 +46,14 @@ RUN wget http://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb \
  && dpkg -i erlang-solutions_1.0_all.deb \
  && apt-get update
 
-ENV ERLANG_VERSION 1:19.3
+ENV ERLANG_VERSION 1:20.0
 
 # install Erlang
 RUN apt-get install -y esl-erlang=$ERLANG_VERSION && rm erlang-solutions_1.0_all.deb
 
 RUN apt-mark hold esl-erlang
 
-ENV ELIXIR_VERSION 1.4.2
+ENV ELIXIR_VERSION 1.4.5
 
 # install Elixir
 RUN mkdir /opt/elixir \
@@ -66,14 +66,14 @@ RUN mkdir /opt/elixir \
   && ln -s /opt/elixir/bin/iex \
   && ln -s /opt/elixir/bin/mix
 
-ENV PHOENIX_VERSION 1.2.1
+ENV PHOENIX_VERSION 1.2.4
 
 # install the Phoenix Mix archive
 RUN mix archive.install --force https://github.com/phoenixframework/archives/raw/master/phoenix_new-$PHOENIX_VERSION.ez
 
 # include Dockerize to help launching containers
-RUN wget https://github.com/jwilder/dockerize/releases/download/v0.2.0/dockerize-linux-amd64-v0.2.0.tar.gz
-RUN tar -C /usr/local/bin -xzvf dockerize-linux-amd64-v0.2.0.tar.gz && rm dockerize-linux-amd64-v0.2.0.tar.gz
+RUN wget https://github.com/jwilder/dockerize/releases/download/v0.5.0/dockerize-linux-amd64-v0.5.0.tar.gz
+RUN tar -C /usr/local/bin -xzvf dockerize-linux-amd64-v0.5.0.tar.gz && rm dockerize-linux-amd64-v0.5.0.tar.gz
 
 # include wait-for-it.sh
 RUN curl -o /bin/wait-for-it.sh https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh

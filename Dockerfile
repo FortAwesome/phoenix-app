@@ -53,7 +53,7 @@ RUN apt-get install -y esl-erlang=$ERLANG_VERSION && rm erlang-solutions_1.0_all
 
 RUN apt-mark hold esl-erlang
 
-ENV ELIXIR_VERSION 1.4.5
+ENV ELIXIR_VERSION 1.5.0
 
 # install Elixir
 RUN mkdir /opt/elixir \
@@ -66,10 +66,10 @@ RUN mkdir /opt/elixir \
   && ln -s /opt/elixir/bin/iex \
   && ln -s /opt/elixir/bin/mix
 
-ENV PHOENIX_VERSION 1.2.4
+ENV PHOENIX_VERSION 1.3.0
 
 # install the Phoenix Mix archive
-RUN mix archive.install --force https://github.com/phoenixframework/archives/raw/master/phoenix_new-$PHOENIX_VERSION.ez
+RUN mix archive.install --force https://github.com/phoenixframework/archives/raw/master/phx_new-$PHOENIX_VERSION.ez
 
 # include Dockerize to help launching containers
 RUN wget https://github.com/jwilder/dockerize/releases/download/v0.5.0/dockerize-linux-amd64-v0.5.0.tar.gz

@@ -53,7 +53,7 @@ RUN apt-get install -y esl-erlang=$ERLANG_VERSION && rm erlang-solutions_1.0_all
 
 RUN apt-mark hold esl-erlang
 
-ENV ELIXIR_VERSION 1.5.0
+ENV ELIXIR_VERSION 1.5.1
 
 # install Elixir
 RUN mkdir /opt/elixir \

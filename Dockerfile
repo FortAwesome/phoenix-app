@@ -7,7 +7,7 @@ ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
 # Update and install some software requirements
-RUN apt-get update && apt-get upgrade -y && apt-get install -y curl build-essential wget git make postgresql inotify-tools xz-utils unzip
+RUN apt-get update && apt-get upgrade -y && apt-get install -y curl build-essential wget git make postgresql inotify-tools xz-utils unzip screen
 
 # For some reason, installing Elixir tries to remove this file
 # and if it doesn't exist, Elixir won't install. So, we create it.

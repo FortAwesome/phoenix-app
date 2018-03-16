@@ -32,14 +32,12 @@ RUN set -ex \
   done
 
 ENV NPM_CONFIG_LOGLEVEL info
-ENV NODE_VERSION 8.9.3
+ENV NODE_VERSION 8.10.0
 
-RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.xz" \
-  && curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/SHASUMS256.txt.asc" \
-  && gpg --batch --decrypt --output SHASUMS256.txt SHASUMS256.txt.asc \
-  && grep " node-v$NODE_VERSION-linux-x64.tar.xz\$" SHASUMS256.txt | sha256sum -c - \
-  && tar -xJf "node-v$NODE_VERSION-linux-x64.tar.xz" -C /usr/local --strip-components=1 \
-  && rm "node-v$NODE_VERSION-linux-x64.tar.xz" SHASUMS256.txt.asc SHASUMS256.txt
+# install Node.js with package
+RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
+
+RUN apt-get install -y nodejs
 
 # download and install Erlang package
 RUN wget https://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb \
@@ -53,7 +51,7 @@ RUN apt-get install -y esl-erlang=$ERLANG_VERSION && rm erlang-solutions_1.0_all
 
 RUN apt-mark hold esl-erlang
 
-ENV ELIXIR_VERSION 1.6.1
+ENV ELIXIR_VERSION 1.6.3
 
 # install Elixir
 RUN mkdir /opt/elixir \
@@ -66,7 +64,7 @@ RUN mkdir /opt/elixir \
   && ln -s /opt/elixir/bin/iex \
   && ln -s /opt/elixir/bin/mix
 
-ENV PHOENIX_VERSION 1.3.0
+ENV PHOENIX_VERSION 1.3.2
 
 # install the Phoenix Mix archive
 RUN mix archive.install --force https://github.com/phoenixframework/archives/raw/master/phx_new-$PHOENIX_VERSION.ez

@@ -32,7 +32,7 @@ RUN set -ex \
   done
 
 ENV NPM_CONFIG_LOGLEVEL info
-ENV NODE_VERSION 8.10.0
+ENV NODE_VERSION 10.0.0
 
 # install Node.js with package
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
@@ -51,7 +51,7 @@ RUN apt-get install -y esl-erlang=$ERLANG_VERSION && rm erlang-solutions_1.0_all
 
 RUN apt-mark hold esl-erlang
 
-ENV ELIXIR_VERSION 1.6.4
+ENV ELIXIR_VERSION 1.6.5
 
 # install Elixir
 RUN mkdir /opt/elixir \
@@ -70,8 +70,8 @@ ENV PHOENIX_VERSION 1.3.2
 RUN mix archive.install --force https://github.com/phoenixframework/archives/raw/master/phx_new-$PHOENIX_VERSION.ez
 
 # include Dockerize to help launching containers
-RUN wget https://github.com/jwilder/dockerize/releases/download/v0.6.0/dockerize-linux-amd64-v0.6.0.tar.gz
-RUN tar -C /usr/local/bin -xzvf dockerize-linux-amd64-v0.6.0.tar.gz && rm dockerize-linux-amd64-v0.6.0.tar.gz
+RUN wget https://github.com/jwilder/dockerize/releases/download/v0.6.1/dockerize-linux-amd64-v0.6.1.tar.gz
+RUN tar -C /usr/local/bin -xzvf dockerize-linux-amd64-v0.6.1.tar.gz && rm dockerize-linux-amd64-v0.6.1.tar.gz
 
 # include wait-for-it.sh
 RUN curl -o /bin/wait-for-it.sh https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh

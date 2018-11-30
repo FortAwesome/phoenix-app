@@ -32,10 +32,10 @@ RUN set -ex \
   done
 
 ENV NPM_CONFIG_LOGLEVEL info
-ENV NODE_VERSION 8.11.3
+ENV NODE_VERSION 10.14.1
 
 # install Node.js with package
-RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
 
 RUN apt-get install -y nodejs
 
@@ -44,14 +44,14 @@ RUN wget https://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb \
  && dpkg -i erlang-solutions_1.0_all.deb \
  && apt-get update
 
-ENV ERLANG_VERSION 1:21.0
+ENV ERLANG_VERSION 1:21.1
 
 # install Erlang
 RUN apt-get install -y esl-erlang=$ERLANG_VERSION && rm erlang-solutions_1.0_all.deb
 
 RUN apt-mark hold esl-erlang
 
-ENV ELIXIR_VERSION 1.7.2
+ENV ELIXIR_VERSION 1.7.4
 
 # install Elixir
 RUN mkdir /opt/elixir \
@@ -64,10 +64,15 @@ RUN mkdir /opt/elixir \
   && ln -s /opt/elixir/bin/iex \
   && ln -s /opt/elixir/bin/mix
 
-ENV PHOENIX_VERSION 1.3.3
+# install Hex
+RUN mix local.hex --force
+
+ENV PHOENIX_VERSION 1.4.0
 
 # install the Phoenix Mix archive
-RUN mix archive.install --force https://github.com/phoenixframework/archives/raw/master/phx_new-$PHOENIX_VERSION.ez
+RUN mix archive.install --force hex phx_new $PHOENIX_VERSION
+
+RUN mix hex.info
 
 # include Dockerize to help launching containers
 RUN wget https://github.com/jwilder/dockerize/releases/download/v0.6.1/dockerize-linux-amd64-v0.6.1.tar.gz
@@ -76,10 +81,6 @@ RUN tar -C /usr/local/bin -xzvf dockerize-linux-amd64-v0.6.1.tar.gz && rm docker
 # include wait-for-it.sh
 RUN curl -o /bin/wait-for-it.sh https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh
 RUN chmod a+x /bin/wait-for-it.sh
-
-# install Hex
-RUN mix local.hex --force
-RUN mix hex.info
 
 # install headless Chrome compatible with puppeteer
 RUN apt-get update && apt-get install -yq libgconf-2-4

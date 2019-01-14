@@ -32,7 +32,7 @@ RUN set -ex \
   done
 
 ENV NPM_CONFIG_LOGLEVEL info
-ENV NODE_VERSION 10.14.1
+ENV NODE_VERSION 10.15.0
 
 # install Node.js with package
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
@@ -44,14 +44,14 @@ RUN wget https://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb \
  && dpkg -i erlang-solutions_1.0_all.deb \
  && apt-get update
 
-ENV ERLANG_VERSION 1:21.1
+ENV ERLANG_VERSION 1:21.2.2-1
 
 # install Erlang
 RUN apt-get install -y esl-erlang=$ERLANG_VERSION && rm erlang-solutions_1.0_all.deb
 
 RUN apt-mark hold esl-erlang
 
-ENV ELIXIR_VERSION 1.7.4
+ENV ELIXIR_VERSION 1.8.0
 
 # install Elixir
 RUN mkdir /opt/elixir \

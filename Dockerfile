@@ -1,4 +1,4 @@
-FROM ubuntu:14.04.5
+FROM ubuntu:14.04
 
 # Elixir requires UTF-8
 RUN locale-gen en_US.UTF-8
@@ -17,7 +17,7 @@ RUN touch /etc/init.d/couchdb
 
 # Install Node
 ENV NPM_CONFIG_LOGLEVEL info
-ENV NODE_VERSION 10.15.1
+ENV NODE_VERSION 10.15.3
 
 # install Node.js with package
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
@@ -29,7 +29,7 @@ RUN wget https://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb \
  && dpkg -i erlang-solutions_1.0_all.deb \
  && apt-get update
 
-ENV ERLANG_VERSION 1:21.2.5-1
+ENV ERLANG_VERSION 1:21.3.3-1
 
 # install Erlang
 RUN apt-get install -y esl-erlang=$ERLANG_VERSION && rm erlang-solutions_1.0_all.deb
@@ -52,7 +52,7 @@ RUN mkdir /opt/elixir \
 # install Hex
 RUN mix local.hex --force
 
-ENV PHOENIX_VERSION 1.4.0
+ENV PHOENIX_VERSION 1.4.3
 
 # install the Phoenix Mix archive
 RUN mix archive.install --force hex phx_new $PHOENIX_VERSION

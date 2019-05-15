@@ -41,30 +41,22 @@ RUN wget https://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb \
  && dpkg -i erlang-solutions_1.0_all.deb \
  && apt-get update
 
-ENV ERLANG_VERSION 1:21.3.7-1
+# install Erlang and Elixir
+ENV ERLANG_VERSION 1:22.0-1
+ENV ELIXIR_VERSION 1.8.2-1
 
-# install Erlang
-RUN apt-get install -y esl-erlang=$ERLANG_VERSION && rm erlang-solutions_1.0_all.deb
+RUN apt-get install -y esl-erlang=$ERLANG_VERSION
 
 RUN apt-mark hold esl-erlang
 
-ENV ELIXIR_VERSION 1.8.1
+RUN apt-get install -y elixir=$ELIXIR_VERSION
 
-# install Elixir
-RUN mkdir /opt/elixir \
-  && cd /opt/elixir \
-  && curl -O -L "https://github.com/elixir-lang/elixir/releases/download/v$ELIXIR_VERSION/Precompiled.zip" \
-  && unzip Precompiled.zip \
-  && cd /usr/local/bin \
-  && ln -s /opt/elixir/bin/elixir \
-  && ln -s /opt/elixir/bin/elixirc \
-  && ln -s /opt/elixir/bin/iex \
-  && ln -s /opt/elixir/bin/mix
+RUN rm erlang-solutions_1.0_all.deb
 
 # install Hex
 RUN mix local.hex --force
 
-ENV PHOENIX_VERSION 1.4.4
+ENV PHOENIX_VERSION 1.4.6
 
 # install the Phoenix Mix archive
 RUN mix archive.install --force hex phx_new $PHOENIX_VERSION

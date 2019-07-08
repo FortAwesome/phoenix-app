@@ -29,7 +29,7 @@ RUN touch /etc/init.d/couchdb
 
 # Install Node
 ENV NPM_CONFIG_LOGLEVEL info
-ENV NODE_VERSION 10.15.3
+ENV NODE_VERSION 10.16.0
 
 # install Node.js with package
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
@@ -42,8 +42,8 @@ RUN wget https://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb \
  && apt-get update
 
 # install Erlang and Elixir
-ENV ERLANG_VERSION 1:22.0-1
-ENV ELIXIR_VERSION 1.8.2-1
+ENV ERLANG_VERSION 1:22.0.4-1
+ENV ELIXIR_VERSION 1.9.0-1
 
 RUN apt-get install -y esl-erlang=$ERLANG_VERSION
 
@@ -56,7 +56,7 @@ RUN rm erlang-solutions_1.0_all.deb
 # install Hex
 RUN mix local.hex --force
 
-ENV PHOENIX_VERSION 1.4.6
+ENV PHOENIX_VERSION 1.4.9
 
 # install the Phoenix Mix archive
 RUN mix archive.install --force hex phx_new $PHOENIX_VERSION

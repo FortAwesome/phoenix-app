@@ -42,8 +42,8 @@ RUN wget https://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb \
  && apt-get update
 
 # install Erlang and Elixir
-ENV ERLANG_VERSION 1:22.0.4-1
-ENV ELIXIR_VERSION 1.9.0-1
+ENV ERLANG_VERSION 1:22.0.7-1
+ENV ELIXIR_VERSION 1.9.1-1
 
 RUN apt-get install -y esl-erlang=$ERLANG_VERSION
 

@@ -42,6 +42,13 @@ RUN wget https://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb \
  && apt-get update
 
 # install Erlang and Elixir
+#
+# WARNING!!! When updating the Erlang/OTP, do not step on this landmine
+# in 22.1 with hackey 1.15.1
+# https://github.com/benoitc/hackney/issues/591
+# It may cause all https requests sent by our app (Stripe, Braintree, GitHub, StackPath, etc.)
+# Make sure that the next version of Erlang/OTP we move up to includes the fix for this
+# issue that was released in hackney 1.15.2.
 ENV ERLANG_VERSION 1:22.0.7-1
 ENV ELIXIR_VERSION 1.9.1-1
 

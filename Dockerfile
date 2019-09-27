@@ -1,31 +1,20 @@
-FROM ubuntu:18.04
+FROM quay.io/fortawesome/elixir:1.9.1-otp22.0.7
+
+ENV DEBIAN_FRONTEND noninteractive
 
 # Update and install some software requirements
-RUN apt-get update 
-RUN apt-get upgrade -y 
-RUN apt-get install -y curl 
-RUN apt-get install -y build-essential 
-RUN apt-get install -y wget 
-RUN apt-get install -y git 
-RUN apt-get install -y make 
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y postgresql 
-RUN apt-get install -y inotify-tools 
-RUN apt-get install -y xz-utils 
-RUN apt-get install -y unzip 
-RUN apt-get install -y screen 
-RUN apt-get install -y locales
-
-# Elixir requires UTF-8
-RUN locale-gen en_US.UTF-8
-ENV LANG en_US.UTF-8
-ENV LANGUAGE en_US:en
-ENV LC_ALL en_US.UTF-8
-
-# For some reason, installing Elixir tries to remove this file
-# and if it doesn't exist, Elixir won't install. So, we create it.
-# Thanks Daniel Berkompas for this tip.
-# http://blog.danielberkompas.com
-RUN touch /etc/init.d/couchdb
+RUN apt-get update && apt-get upgrade -y && apt-get install -y \
+  curl \
+  build-essential \
+  wget \
+  git \
+  make \
+  postgresql \
+  inotify-tools \
+  xz-utils \
+  unzip \
+  screen \
+  locales
 
 # Install Node
 ENV NPM_CONFIG_LOGLEVEL info
@@ -36,34 +25,10 @@ RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
 
 RUN apt-get install -y nodejs
 
-# download and install Erlang package
-RUN wget https://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb \
- && dpkg -i erlang-solutions_1.0_all.deb \
- && apt-get update
-
-# install Erlang and Elixir
-#
-# WARNING!!! When updating the Erlang/OTP, do not step on this landmine
-# in 22.1 with hackey 1.15.1
-# https://github.com/benoitc/hackney/issues/591
-# It may cause all https requests sent by our app (Stripe, Braintree, GitHub, StackPath, etc.)
-# Make sure that the next version of Erlang/OTP we move up to includes the fix for this
-# issue that was released in hackney 1.15.2.
-ENV ERLANG_VERSION 1:22.0.7-1
-ENV ELIXIR_VERSION 1.9.1-1
-
-RUN apt-get install -y esl-erlang=$ERLANG_VERSION
-
-RUN apt-mark hold esl-erlang
-
-RUN apt-get install -y elixir=$ELIXIR_VERSION
-
-RUN rm erlang-solutions_1.0_all.deb
-
 # install Hex
 RUN mix local.hex --force
 
-ENV PHOENIX_VERSION 1.4.9
+ENV PHOENIX_VERSION 1.4.10
 
 # install the Phoenix Mix archive
 RUN mix archive.install --force hex phx_new $PHOENIX_VERSION
@@ -89,4 +54,3 @@ RUN apt-get update && apt-get install -y wget --no-install-recommends \
   && rm -rf /var/lib/apt/lists/* \
   && apt-get purge --auto-remove -y curl \
   && rm -rf /src/*.deb
-

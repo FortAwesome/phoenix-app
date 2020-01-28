@@ -1,4 +1,4 @@
-FROM quay.io/fortawesome/elixir:1.10.0-otp22.2.3
+FROM quay.io/fortawesome/elixir:1.10.0-otp22.2.4
 
 ENV DEBIAN_FRONTEND noninteractive
 

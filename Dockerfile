@@ -1,4 +1,4 @@
-FROM quay.io/fortawesome/elixir:1.10.0-otp22.2.4
+FROM quay.io/fortawesome/elixir:1.10.1-otp22.2.6
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -18,7 +18,7 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
 
 # Install Node
 ENV NPM_CONFIG_LOGLEVEL info
-ENV NODE_VERSION 12.14.1
+ENV NODE_VERSION 12.15.0
 
 # install Node.js with package
 RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -

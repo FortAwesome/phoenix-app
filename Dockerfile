@@ -1,4 +1,4 @@
-FROM quay.io/fortawesome/elixir:1.10.3-otp23.0
+FROM quay.io/fortawesome/elixir:1.10.3-otp23.0.1
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -28,7 +28,7 @@ RUN apt-get install -y nodejs
 # install Hex
 RUN mix local.hex --force
 
-ENV PHOENIX_VERSION 1.5.1
+ENV PHOENIX_VERSION 1.5.3
 
 # install the Phoenix Mix archive
 RUN mix archive.install --force hex phx_new $PHOENIX_VERSION

@@ -1,4 +1,4 @@
-FROM quay.io/fortawesome/elixir:1.11.3-otp23.2.5
+FROM quay.io/fortawesome/elixir:1.11.3-otp23.2.7
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -18,7 +18,7 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
 
 # Install Node
 ENV NPM_CONFIG_LOGLEVEL info
-ENV NODE_VERSION 14.15.5
+ENV NODE_VERSION 14.16.0
 
 # install Node.js with package
 RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
@@ -28,7 +28,7 @@ RUN apt-get install -y nodejs
 # install Hex
 RUN mix local.hex --force
 
-ENV PHOENIX_VERSION 1.5.7
+ENV PHOENIX_VERSION 1.5.8
 
 # install the Phoenix Mix archive
 RUN mix archive.install --force hex phx_new $PHOENIX_VERSION

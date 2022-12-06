@@ -21,9 +21,14 @@ ENV NPM_CONFIG_LOGLEVEL info
 ENV NODE_VERSION 18.12.1
 
 # install Node.js with package
-RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_18.x | bash -
 
 RUN apt-get install -y nodejs
+
+# install NPM version
+ENV NPM_VERSION 9.1.3
+
+RUN npm install -g npm@$NPM_VERSION
 
 # install Hex
 RUN mix local.hex --force

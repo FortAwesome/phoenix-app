@@ -1,4 +1,4 @@
-FROM quay.io/fortawesome/elixir:1.15.4-otp26.0.2-rust1.71.0
+FROM quay.io/fortawesome/elixir:1.15.5-otp26.0.2-rust1.72.0
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -18,7 +18,7 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
 
 # Install Node
 ENV NPM_CONFIG_LOGLEVEL info
-ENV NODE_VERSION 18.16.1
+ENV NODE_VERSION 18.17.1
 
 # install Node.js with package
 RUN curl -sL https://deb.nodesource.com/setup_18.x | bash -
@@ -26,7 +26,7 @@ RUN curl -sL https://deb.nodesource.com/setup_18.x | bash -
 RUN apt-get install -y nodejs
 
 # install NPM version
-ENV NPM_VERSION 9.8.0
+ENV NPM_VERSION 10.1.0
 
 RUN npm install -g npm@$NPM_VERSION
 

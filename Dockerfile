@@ -33,7 +33,7 @@ RUN npm install -g npm@$NPM_VERSION
 # install Hex
 RUN mix local.hex --force
 
-ENV PHOENIX_VERSION 1.7.8
+ENV PHOENIX_VERSION 1.7.7
 
 # install the Phoenix Mix archive
 RUN mix archive.install --force hex phx_new $PHOENIX_VERSION

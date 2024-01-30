@@ -1,4 +1,4 @@
-FROM quay.io/fortawesome/elixir:1.15.7-otp26.1.2-rust1.74.0
+FROM quay.io/fortawesome/elixir:1.16.0-otp26.2.1-rust1.75.0
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -18,7 +18,7 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
 
 # Install Node
 ENV NPM_CONFIG_LOGLEVEL info
-ENV NODE_VERSION 20.10.0
+ENV NODE_VERSION 20.11.0
 
 # install Node.js with package
 RUN curl -sL https://deb.nodesource.com/setup_20.x | bash -
@@ -26,7 +26,7 @@ RUN curl -sL https://deb.nodesource.com/setup_20.x | bash -
 RUN apt-get install -y nodejs
 
 # install NPM version
-ENV NPM_VERSION 10.2.4
+ENV NPM_VERSION 10.4.0
 
 RUN npm install -g npm@$NPM_VERSION
 

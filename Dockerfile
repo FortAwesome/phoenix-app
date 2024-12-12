@@ -1,6 +1,6 @@
 FROM quay.io/fortawesome/elixir:1.17.3-otp27.2-rust1.83.0
 
-ENV DEBIAN_FRONTEND noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
 
 # Update and install some software requirements
 RUN apt-get update && apt-get upgrade -y && apt-get install -y \
@@ -17,8 +17,8 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
   locales
 
 # Install Node
-ENV NPM_CONFIG_LOGLEVEL info
-ENV NODE_VERSION 22.12.0
+ENV NPM_CONFIG_LOGLEVEL=info
+ENV NODE_VERSION=22.12.0
 
 # install Node.js with package
 RUN curl -sL https://deb.nodesource.com/setup_22.x | bash -
@@ -26,14 +26,14 @@ RUN curl -sL https://deb.nodesource.com/setup_22.x | bash -
 RUN apt-get install -y nodejs
 
 # install NPM version
-ENV NPM_VERSION 10.9.2
+ENV NPM_VERSION=10.9.2
 
 RUN npm install -g npm@$NPM_VERSION
 
 # install Hex
 RUN mix local.hex --force
 
-ENV PHOENIX_VERSION 1.7.18
+ENV PHOENIX_VERSION=1.7.18
 
 # install the Phoenix Mix archive
 RUN mix archive.install --force hex phx_new $PHOENIX_VERSION

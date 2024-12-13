@@ -7,8 +7,8 @@ on:
 jobs:
   build:
     runs-on:
-      group: Extra Large Runners
-      labels: ubuntu-latest-extra-large
+      group: Default Larger Runners
+      labels: ubuntu-latest-larger
 
     steps:
       - uses: actions/checkout@v4

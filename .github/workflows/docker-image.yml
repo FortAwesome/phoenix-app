@@ -6,9 +6,7 @@ on:
 
 jobs:
   build:
-    runs-on:
-      group: Default Larger Runners
-      labels: ubuntu-latest-larger
+    runs-on: ubuntu-latest-extra-large
 
     steps:
       - uses: actions/checkout@v4

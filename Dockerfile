@@ -18,7 +18,7 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
 
 # Install Node
 ENV NPM_CONFIG_LOGLEVEL=info
-ENV NODE_VERSION=22.20.0
+ENV NODE_VERSION=22.21.0
 
 # install Node.js with package
 RUN curl -sL https://deb.nodesource.com/setup_22.x | bash -
